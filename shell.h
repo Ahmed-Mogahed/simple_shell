@@ -71,5 +71,7 @@ char **copy_env(char **environ_copy, unsigned int environ_leng_th);
 l_ists *potathlist(char *vari, l_ists *head);
 void free_all_memo(char **toke_n, char *L, char *fpath, int flag);
 void free_dp(char **arr, unsigned int leng_th);
+void perr(const char *message);
+char *_which(const char *command, const char *path);
 
 #endif
