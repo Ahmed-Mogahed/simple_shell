@@ -1,49 +1,35 @@
 #include "shell.h"
 
-char **tokenizer(char *L)
+/**
+ * token_izer - tokenizes string
+ * @str: user input
+ * Return: pointer to arr of toke_n
+ */
+
+char **token_izer(char *str)
 {
-    char *Token = NULL, *tmp = NULL;
-    char **com = NULL;
-    int cp = 0, m = 0;
+	char **toke_n;
+	char *token;
+	unsigned int i;
 
-    if (!L)
-        return (NULL);
+	toke_n = malloc(sizeof(char) * B_UFFER);
+	if (toke_n == NULL)
+	{
+		errs(3);
+		exit(EXIT_FAILURE);
+	}
 
-    tmp = _strdup(L);
-    Token = strtok(tmp, DELIM);
+	token = strtok(str, "\n\t\r ");
 
-    if (Token == NULL) /* Remove the semicolon and move the code to the if block*/
-    {
-        free(L);
-        free(tmp);
-        return (NULL);
-    }
+	i = 0;
+	while (token != NULL)
+	{
+		toke_n[i] = token;
+		token = strtok(NULL, "\n\t\r ");
+		i++;
+	}
 
-    while (Token)
-    {
-        cp++;
-        Token = strtok(NULL, DELIM);
-    }
-    free(tmp);
+	toke_n[i] = NULL;
 
-    com = malloc(sizeof(char *) * (cp + 1));
-
-    if (!com)
-    {
-        free(L);
-        return (NULL);
-    }
-
-    Token = strtok(L, DELIM);
-
-    while (Token)
-    {
-        com[m] = _strdup(Token);
-        Token = strtok(NULL, DELIM);
-        m++;
-    }
-    free(L);
-    com[m] = NULL;
-    return (com);
+	return (toke_n);
 }
-
